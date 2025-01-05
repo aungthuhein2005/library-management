@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Library Books</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+</head>
+<body class="bg-gray-100">
+    <div class="container mx-auto mt-6 p-4">
+        <h1 class="text-3xl font-semibold mb-4">Library Books</h1>
+        <a href="/books/add" class="btn btn-primary text-white bg-blue-500 hover:bg-blue-600 px-4 py-2 rounded-md mb-4 inline-block">
+            Add Book
+        </a>
+
+        <table class="min-w-full border-separate rounded-lg">
+            <thead>
+                <tr class="bg-gray-100 border-b">
+                    <th class="px-4 py-2 text-left font-medium text-gray-700 border-b">Title</th>
+                    <th class="px-4 py-2 text-left font-medium text-gray-700 border-b">Author</th>
+                    <th class="px-4 py-2 text-left font-medium text-gray-700 border-b">ISBN</th>
+                    <th class="px-4 py-2 text-left font-medium text-gray-700 border-b">Available</th>
+                    <th class="px-4 py-2 text-left font-medium text-gray-700">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="book : ${books}" data-book-id="${book.id}" class="hover:bg-gray-50 border-b">
+                    <td class="px-4 py-2 border-b" th:text="${book.title}"></td>
+                    <td class="px-4 py-2 border-b" th:text="${book.author.name}"></td>
+                    <td class="px-4 py-2 border-b" th:text="${book.isbn}"></td>
+                    <td class="px-4 py-2 border-b">
+                        <span 
+                            class="inline-flex items-center rounded-md px-2 py-1 text-xs font-medium ring-1 ring-inset" 
+                            th:classappend="${book.available} ? 
+                                'bg-green-50 text-green-700 ring-green-700/10' : 
+                                'bg-red-50 text-red-700 ring-red-700/10'" 
+                            th:text="${book.available ? 'Yes' : 'No'}">
+                        </span>
+                    </td>
+                    <td class="px-4 py-2 border-b text-center">
+                        <div class="flex justify-center items-center space-x-4">
+                            <a th:href="'/books/edit/' + ${book.id}" class="text-blue-500 hover:text-blue-700">
+                                <i data-lucide="edit-2" class="w-5 h-5"></i>
+                            </a>
+							<a th:href="'/books/delete/' + ${book.id}" class="text-red-500 hover:text-red-700">
+							    <i data-lucide="trash" class="w-5 h-5"></i>
+							</a>
+
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        lucide.createIcons();
+
+
+    </script>
+</body>
+</html>

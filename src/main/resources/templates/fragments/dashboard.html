@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Admin Dashboard</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body class="bg-gray-100 p-8">
+    <div class="max-w-6xl mx-auto p-6 ">
+
+        <!-- Dashboard Stats -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+            <!-- Total Books -->
+            <div class="bg-blue-500 text-white p-6 rounded-lg shadow-md">
+                <h3 class="text-xl font-semibold mb-2">Total Books</h3>
+                <p class="text-3xl" th:text="${totalBooks}">100</p>
+            </div>
+
+            <!-- Borrowed Books -->
+            <div class="bg-yellow-500 text-white p-6 rounded-lg shadow-md">
+                <h3 class="text-xl font-semibold mb-2">Borrowed Books</h3>
+                <p class="text-3xl" th:text="${borrowedBooks}">25</p>
+            </div>
+
+            <!-- Available Books -->
+            <div class="bg-green-500 text-white p-6 rounded-lg shadow-md">
+                <h3 class="text-xl font-semibold mb-2">Available Books</h3>
+                <p class="text-3xl" th:text="${availableBooks}">75</p>
+            </div>
+
+            <!-- Total Borrowers -->
+            <div class="bg-purple-500 text-white p-6 rounded-lg shadow-md">
+                <h3 class="text-xl font-semibold mb-2">Total Borrowers</h3>
+                <p class="text-3xl" th:text="${totalBorrowers}">50</p>
+            </div>
+        </div>
+
+        <!-- Transactions Chart -->
+        <div class="bg-white p-6 rounded-lg shadow-md">
+            <h3 class="text-2xl font-semibold text-gray-800 mb-4">Transactions</h3>
+            <canvas id="transactionsChart" width="400" height="200"></canvas>
+        </div>
+    </div>
+
+    <!-- Chart.js Script -->
+    <script>
+        // Fetch the Thymeleaf variables and parse them into JavaScript arrays
+        const transactionDates = /*[[${transactionDates}]]*/ '["2025-01-01", "2025-01-02", "2025-01-03"]'; // Example
+        const transactionCounts = /*[[${transactionCounts}]]*/ '[10, 12, 15]'; // Example
+        
+        // Convert the data from strings into actual JavaScript arrays
+        const dates = JSON.parse(transactionDates);
+        const counts = JSON.parse(transactionCounts);
+        
+        // Chart.js configuration for transactions
+        const ctx = document.getElementById('transactionsChart').getContext('2d');
+        const transactionsChart = new Chart(ctx, {
+            type: 'line', // You can use 'bar', 'pie', etc.
+            data: {
+                labels: dates,  // Now using the parsed dates array
+                datasets: [{
+                    label: 'Transactions',
+                    data: counts,  // Now using the parsed counts array
+                    borderColor: 'rgba(75, 192, 192, 1)',
+                    backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>

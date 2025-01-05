@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Add/Edit Book</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100 p-8">
+    <div class="max-w-2xl mx-auto bg-white p-6 rounded-lg shadow-md">
+        <div class="flex align-center justify-between">
+			<h1 class="text-2xl font-semibold text-gray-800 mb-6" th:text="${book.id != null ? 'Edit Book' : 'Add Book'}"></h1>
+					<a href="/books">back</a>
+		</div>
+        <form th:action="@{/books}" th:object="${book}" method="post" class="space-y-4">
+            <input type="hidden" th:field="*{id}" />
+            <div>
+                <label for="title" class="block text-gray-700">Title:</label>
+                <input type="text" id="title" th:field="*{title}" required class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary" />
+            </div>
+            <div>
+                <label for="author" class="block text-gray-700">Author:</label>
+                <select id="author" th:field="*{author.id}" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary">
+                    <option th:each="author : ${authors}" th:value="${author.id}" th:text="${author.name}"></option>
+                </select>
+            </div>
+            <div>
+                <label for="isbn" class="block text-gray-700">ISBN:</label>
+                <input type="text" id="isbn" th:field="*{isbn}" required class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary" />
+            </div>
+            <div class="flex items-center">
+                <input type="checkbox" id="available" th:field="*{available}" class="mr-2" />
+                <label for="available" class="text-gray-700">Available</label>
+            </div>
+            <div>
+                <button type="submit" class="w-full bg-primary text-white py-2 rounded-lg bg-blue-500 hover:bg-blue-700 transition-colors">Save</button>
+            </div>
+        </form>
+    </div>
+</body>
+</html>

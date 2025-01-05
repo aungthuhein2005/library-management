@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Library Transaction</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+</head>
+<body class="bg-gray-100">
+    <div class="container mx-auto mt-6 p-4">
+        <h1 class="text-3xl font-semibold mb-4">Library Transactions</h1>
+        <a href="/transactions/add" class="btn btn-primary text-white bg-blue-500 hover:bg-blue-600 px-4 py-2 rounded-md mb-4 inline-block">
+            Add Transaction
+        </a>
+
+        <table class="min-w-full border-separate rounded-lg">
+            <thead>
+                <tr class="bg-gray-100 border-b">
+                    <th class="px-4 py-2 text-left font-medium text-gray-700 border-b">Borrower</th>
+                    <th class="px-4 py-2 text-left font-medium text-gray-700">Book</th>
+					<th class="px-4 py-2 text-left font-medium text-gray-700">IssueDate</th>
+					<th class="px-4 py-2 text-left font-medium text-gray-700">Due Date</th>
+					<th class="px-4 py-2 text-left font-medium text-gray-700">Return Date</th>
+					<th class="px-4 py-2 text-left font-medium text-gray-700">Completed</th>
+					<th class="px-4 py-2 text-left font-medium text-gray-700">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="transaction : ${transactions}" data-book-id="${author.id}" class="hover:bg-gray-50 border-b">
+
+                    <td class="px-4 py-2 border-b" th:text="${transaction.book.id}"></td>
+					<td class="px-4 py-2 border-b" th:text="${transaction.borrower.id}"></td>
+					<td class="px-4 py-2 border-b" th:text="${transaction.issueDate}"></td>
+					<td class="px-4 py-2 border-b" th:text="${transaction.dueDate}"></td>
+					<td class="px-4 py-2 border-b" th:text="${transaction.returnDate}"></td>
+					<td class="px-4 py-2 border-b">
+						<span 
+						                            class="inline-flex items-center rounded-md px-2 py-1 text-xs font-medium ring-1 ring-inset" 
+						                            th:classappend="${transaction.status} ? 
+						                                'bg-green-50 text-green-700 ring-green-700/10' : 
+						                                'bg-red-50 text-red-700 ring-red-700/10'" 
+						                            th:text="${transaction.status ? 'Yes' : 'No'}">
+						                        </span>
+					</td>
+                    <td class="px-4 py-2 border-b text-center">
+                        <div class="flex justify-center items-center space-x-4">
+                            <a th:href="'/transactions/edit/' + ${transaction.id}" class="text-blue-500 hover:text-blue-700">
+                                <i data-lucide="edit-2" class="w-5 h-5"></i>
+                            </a>
+							<a th:href="'/transactions/delete/' + ${transaction.id}" class="text-red-500 hover:text-red-700">
+							    <i data-lucide="trash" class="w-5 h-5"></i>
+							</a>
+
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        lucide.createIcons();
+
+
+    </script>
+</body>
+</html>

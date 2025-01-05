@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Add/Edit Transaction</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100 p-8">
+    <div class="max-w-2xl mx-auto bg-white p-6 rounded-lg shadow-md">
+        <div class="flex align-center justify-between">
+            <h1 class="text-2xl font-semibold text-gray-800 mb-6" th:text="${transaction.id != null ? 'Edit Transaction' : 'Add Transaction'}"></h1>
+            <a href="/transactions" class="text-blue-500 hover:underline">Back</a>
+        </div>
+        <form th:action="@{/transactions}" th:object="${transaction}" method="post" class="space-y-4">
+            <input type="hidden" th:field="*{id}" />
+
+            <!-- Borrower Field -->
+            <div>
+                <label for="borrower" class="block text-gray-700">Borrower:</label>
+                <select id="borrower" th:field="*{borrower.id}" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary">
+                    <option th:each="borrower : ${borrowers}" th:value="${borrower.id}" th:text="${borrower.name}"></option>
+                </select>
+            </div>
+
+            <!-- Book Field -->
+            <div>
+                <label for="book" class="block text-gray-700">Book:</label>
+                <select id="book" th:field="*{book.id}" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary">
+                    <option th:each="book : ${books}" th:value="${book.id}" th:text="${book.title}"></option>
+                </select>
+            </div>
+
+            <!-- Transaction Date Field (Always visible for both Add and Edit) -->
+            <div>
+                <label for="transactionDate" class="block text-gray-700">Transaction Date:</label>
+                <input type="date" id="transactionDate" th:field="*{issueDate}" required class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary" />
+            </div>
+
+            <!-- Due Date Field (Always visible for both Add and Edit) -->
+            <div>
+                <label for="dueDate" class="block text-gray-700">Due Date:</label>
+                <input type="date" id="dueDate" th:field="*{dueDate}" required class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary" />
+            </div>
+
+            <!-- Return Date Field (Visible only for Edit) -->
+            <div th:if="${transaction.id != null}">
+                <label for="returnDate" class="block text-gray-700">Return Date:</label>
+                <input type="date" id="returnDate" th:field="*{returnDate}" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary" />
+            </div>
+
+            <!-- Status Field (Visible only for Edit) -->
+            <div th:if="${transaction.id != null}" class="flex items-center">
+                <input type="checkbox" id="status" th:field="*{status}" class="mr-2" />
+                <label for="status" class="text-gray-700">Completed</label>
+            </div>
+
+            <div>
+                <button type="submit" class="w-full bg-primary text-white py-2 rounded-lg bg-blue-500 hover:bg-blue-700 transition-colors">Save</button>
+            </div>
+        </form>
+    </div>
+</body>
+</html>

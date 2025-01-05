@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Settings</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100 p-8">
+
+    <!-- Settings Page -->
+    <div class="max-w-4xl mx-auto p-6 bg-white rounded-lg shadow-md">
+		<div class="bg-yellow-100 border-t-4 border-yellow-500 rounded-b text-yellow-900 px-4 py-3 shadow-md" role="alert">
+		  <div class="flex">
+		    <div class="py-1"><svg class="fill-current h-6 w-6 text-teal-500 mr-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M2.93 17.07A10 10 0 1 1 17.07 2.93 10 10 0 0 1 2.93 17.07zm12.73-1.41A8 8 0 1 0 4.34 4.34a8 8 0 0 0 11.32 11.32zM9 11V9h2v6H9v-4zm0-6h2v2H9V5z"/></svg></div>
+		    <div>
+		      <p class="font-bold">Warning</p>
+		      <p class="text-sm">This feature is not available right now</p>
+		    </div>
+		  </div>
+		</div>
+        <h2 class="text-3xl font-semibold text-gray-800 mb-6">Settings</h2>
+
+        <!-- Profile Settings -->
+        <div class="bg-gray-50 p-6 rounded-lg shadow-sm mb-6">
+            <h3 class="text-2xl font-semibold text-gray-700 mb-4">Profile Settings</h3>
+            <form action="#" method="POST">
+                <div class="space-y-4">
+                    <div class="flex items-center space-x-4">
+                        <label for="username" class="w-1/4 text-gray-700">Username:</label>
+                        <input type="text" id="username" name="username" class="w-full p-2 border border-gray-300 rounded-md" value="john_doe">
+                    </div>
+                    <div class="flex items-center space-x-4">
+                        <label for="email" class="w-1/4 text-gray-700">Email:</label>
+                        <input type="email" id="email" name="email" class="w-full p-2 border border-gray-300 rounded-md" value="john_doe@example.com">
+                    </div>
+                    <div class="flex items-center space-x-4">
+                        <label for="password" class="w-1/4 text-gray-700">Password:</label>
+                        <input type="password" id="password" name="password" class="w-full p-2 border border-gray-300 rounded-md" placeholder="Enter new password">
+                    </div>
+                </div>
+                <div class="mt-4">
+                    <button type="submit" class="bg-blue-500 text-white px-6 py-2 rounded-md">Save Profile</button>
+                </div>
+            </form>
+        </div>
+
+        <!-- Theme Settings -->
+        <div class="bg-gray-50 p-6 rounded-lg shadow-sm mb-6">
+            <h3 class="text-2xl font-semibold text-gray-700 mb-4">Theme Settings</h3>
+            <form action="#" method="POST">
+                <div class="space-y-4">
+                    <div class="flex items-center space-x-4">
+                        <label for="theme" class="w-1/4 text-gray-700">Select Theme:</label>
+                        <select id="theme" name="theme" class="w-full p-2 border border-gray-300 rounded-md">
+                            <option value="light">Light</option>
+                            <option value="dark">Dark</option>
+                        </select>
+                    </div>
+                    <div class="flex items-center space-x-4">
+                        <label for="language" class="w-1/4 text-gray-700">Language:</label>
+                        <select id="language" name="language" class="w-full p-2 border border-gray-300 rounded-md">
+                            <option value="english">English</option>
+                            <option value="spanish">Spanish</option>
+                            <option value="french">French</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="mt-4">
+                    <button type="submit" class="bg-blue-500 text-white px-6 py-2 rounded-md">Save Theme</button>
+                </div>
+            </form>
+        </div>
+
+        <!-- Notification Settings -->
+        <div class="bg-gray-50 p-6 rounded-lg shadow-sm mb-6">
+            <h3 class="text-2xl font-semibold text-gray-700 mb-4">Notification Settings</h3>
+            <form action="#" method="POST">
+                <div class="space-y-4">
+                    <div class="flex items-center space-x-4">
+                        <label for="emailNotifications" class="w-1/4 text-gray-700">Email Notifications:</label>
+                        <input type="checkbox" id="emailNotifications" name="emailNotifications" checked class="h-5 w-5 text-blue-500">
+                    </div>
+                    <div class="flex items-center space-x-4">
+                        <label for="smsNotifications" class="w-1/4 text-gray-700">SMS Notifications:</label>
+                        <input type="checkbox" id="smsNotifications" name="smsNotifications" class="h-5 w-5 text-blue-500">
+                    </div>
+                    <div class="flex items-center space-x-4">
+                        <label for="pushNotifications" class="w-1/4 text-gray-700">Push Notifications:</label>
+                        <input type="checkbox" id="pushNotifications" name="pushNotifications" checked class="h-5 w-5 text-blue-500">
+                    </div>
+                </div>
+                <div class="mt-4">
+                    <button type="submit" class="bg-blue-500 text-white px-6 py-2 rounded-md">Save Notifications</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+</body>
+</html>
