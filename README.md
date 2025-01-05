@@ -35,6 +35,7 @@ A simple library management system that allows managing books, borrowers, and tr
 
 ```bash
 git clone https://github.com/aungthuhein2005/library-management.git
+```
 
 ### Configure the database connection
 ```bash 
